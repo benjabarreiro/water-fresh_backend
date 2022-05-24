@@ -6,7 +6,8 @@ const controller = {
   sendEmail: async (req, res) => {
     try {
       console.log("success");
-      console.log(req.body)
+      console.log(req.body);
+      res.headers.add('Access-Control-Allow-Origin', '*')
       return await sendEmail(req, res);
     } catch (err) {
       console.log("Hubo un error en el servicio");
