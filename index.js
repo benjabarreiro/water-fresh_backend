@@ -9,8 +9,13 @@ const bodyParser = require("body-parser");
 const mongoose = require('mongoose')
 const router = require('./routes.js')
 
-app.use(cors());
-app.options('*', cors())
+const corsOptions ={
+    origin:'http://localhost:3000', 
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200
+}
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
