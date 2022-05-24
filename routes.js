@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const cors = require('cors')
 
 const controller = require("./controller.js");
 
@@ -15,7 +16,7 @@ function verifyToken(req, res, next){
 	}
 }
 
-router.post("/access", controller.sendEmail);
+router.post("/access", cors(), controller.sendEmail);
 
 router.post("/create", verifyToken, controller.create);
 
