@@ -31,6 +31,6 @@ mongoose.connect('mongodb+srv://benja-barreiro:benja123@cluster0.g6ufp.mongodb.n
     if(err) throw new Error(`Error en la conexión con la base de datos ${err}`);
     console.log('Base de datos conectada');
     
-    const server = app.listen(PORT, () => console.info(`server has started on ${PORT}`));
+    const server = app.listen(process.env.PORT || 5000, () => console.info(`server has started on ${PORT}`));
     server.on('error', error => console.log(`Error en el Servidor ${error}`));
 });
