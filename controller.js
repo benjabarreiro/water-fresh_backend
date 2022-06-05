@@ -52,21 +52,33 @@ const controller = {
       .catch((error) => res.json({ message: error }));
   },
 
-  login: (req, res) => {
-    console.log("login");
+  login: async (req, res, next) => {
+    const { user, password } = req.body;
 
-    const user = {
+    const userDB = {
       id: 1,
-      nombre: "Henry",
-      email: "henry@email.com",
+      password: "henry",
+      user: "henry",
     };
 
-    jwt.sign({ user }, "secretkey", { expiresIn: "32s" }, (err, token) => {
-      console.log(token, err, "algo");
-      res.send({
-        token,
+    if (user !== userDB.user) {
+      res.send("Credenciales invalidas").status(500);
+    }
+
+    if (password !== userDB.password) {
+      res.send("Credenciales invalidas").status(500);
+    }
+    let token;
+    try {
+      token = jwt.sign({ userId: userDB.id, user: userDB.user }, "secretkey", {
+        expiresIn: "3h",
       });
-    });
+    } catch (err) {
+      console.log("token falla");
+      res.send("Falló login").status(500);
+    }
+    console.log(token);
+    res.send({ userId: userDB.id, user: userDB.user, token });
   },
 };
 
