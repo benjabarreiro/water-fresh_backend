@@ -2,7 +2,6 @@ require('dotenv').config();
 const express = require("express");
 const app = express();
 
-const cors = require("cors");
 const path = require("path");
 const bodyParser = require("body-parser");
 
@@ -21,8 +20,6 @@ app.use((req, res, next) => {
   
     next();
   });
-
-app.use(cors())
 
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
